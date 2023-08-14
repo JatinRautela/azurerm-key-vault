@@ -88,3 +88,70 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "nacl_default_action" {
+  description = "The default action of the Network ACL (NACL) attached to the Azure Key Vault. Allowed values are 'Allow' or 'Deny'."
+  type = string
+  default = "Deny"
+}
+
+variable "sku_name" {
+  description = "The SKU (pricing tier) name for the Azure Key Vault. Valid values include 'standard' and 'premium'."
+  type = string
+  default = "standard"
+}
+
+variable "enabled_for_deployment" {
+  description = "Specifies whether the Azure Key Vault is enabled for deployment. Set to 'true' to enable or 'false' to disable."
+  type = bool
+  default = false
+}
+
+variable "enabled_for_disk_encryption" {
+  description = "Specifies whether the Azure Key Vault is enabled for disk encryption. Set to 'true' to enable or 'false' to disable."
+  type = bool
+  default = false
+}
+
+variable "enabled_for_template_deployment" {
+  description = "Specifies whether the Azure Key Vault is enabled for template deployment. Set to 'true' to enable or 'false' to disable."
+  type = bool
+  default = false
+}
+
+variable "diagnostic_setting_enabled_metrics" {
+  description = "A map of metrics categories and their settings to be enabled for this diagnostic setting."
+  type        = map(object({
+    enabled         = bool
+    retention_days  = number
+    retention_enabled = bool
+  }))
+  default = {
+    "AllMetrics" = {
+      enabled = true
+      retention_days = 0
+      retention_enabled = false
+    }
+  }
+}
+
+variable "name" {
+  type        = string
+  description = "A string value to describe prefix of all the resources"
+  default     = ""
+}
+
+variable "default_tags" {
+  type        = map(string)
+  description = "A map to add common tags to all the resources"
+  default = {
+    "Scope" : "ACI"
+    "CreatedBy" : "Terraform"
+  }
+}
+
+variable "common_tags" {
+  type        = map(string)
+  description = "A map to add common tags to all the resources"
+  default     = {}
+}

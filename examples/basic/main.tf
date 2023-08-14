@@ -3,41 +3,33 @@ provider "azurerm" {
 }
 
 locals {
-  tags = {
-    environment = "test"
-  }
+  env         = var.env
+  name        = var.pname
+  name_prefix = "${local.env}${local.name}"
 }
 
 data "azurerm_client_config" "current" {}
 
-resource "random_id" "this" {
-  byte_length = 8
-}
-
-resource "azurerm_resource_group" "this" {
-  name     = "rg-${random_id.this.hex}"
+resource "azurerm_resource_group" "rg" {
+  name     = "${local.name_prefix}-rg"
   location = var.location
-
-  tags = local.tags
 }
 
 module "log_analytics" {
   source = "git::https://github.com/JatinRautela/azurerm-log-analytics.git"
 
-  workspace_name      = "log-${random_id.this.hex}"
-  resource_group_name = azurerm_resource_group.this.name
-  location            = azurerm_resource_group.this.location
-
-  tags = local.tags
+  workspace_name      = "${local.name_prefix}-log"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
 }
 
 module "key_vault" {
   # source = "git::https://github.com/JatinRautela/azurerm-key-vault.git"
   source = "../.."
 
-  vault_name                 = "kv-${random_id.this.hex}"
-  resource_group_name        = azurerm_resource_group.this.name
-  location                   = azurerm_resource_group.this.location
+  vault_name                 = "${local.name_prefix}-kv"
+  resource_group_name        = azurerm_resource_group.rg.name
+  location                   = azurerm_resource_group.rg.location
   log_analytics_workspace_id = module.log_analytics.workspace_id
 
   access_policies = [
@@ -46,6 +38,4 @@ module "key_vault" {
       secret_permissions = ["Get", "List", "Set", "Delete", "Backup", "Restore", "Recover"]
     }
   ]
-
-  tags = local.tags
 }

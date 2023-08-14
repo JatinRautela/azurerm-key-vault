@@ -80,7 +80,6 @@ Terraform will show you the resources that will be destroyed. Type `yes` to conf
 | `resource_group_name`                      | The name of the resource group.             | `string`     |                                |
 | `location`                                 | The location for the Key Vault.             | `string`     |                                |
 | `soft_delete_retention_days`                | Retention days for soft-deleted items.     | `number`     | `90`                           |
-| ... (other input variables)                | ...                                          | ...          | ...                            |
 
 ## Outputs
 
@@ -89,7 +88,7 @@ Terraform will show you the resources that will be destroyed. Type `yes` to conf
 | `vault_id`                                | The ID of the Key Vault.                    | `string`     |
 | `vault_name`                              | The name of the Key Vault.                  | `string`     |
 | `vault_uri`                               | The URI of the Key Vault.                   | `string`     |
-| ... (other output variables)               | ...                                          | ...          |
+
 
 ## Example Usage
 

@@ -1,16 +1,19 @@
 variable "vault_name" {
   description = "The name of this Key vault."
   type        = string
+  default     = "vault-name"
 }
 
 variable "resource_group_name" {
   description = "The name of the resource group to create the resources in."
   type        = string
+  default     = "rgname"
 }
 
 variable "location" {
   description = "The location to create the resources in."
   type        = string
+  default     = "northeurope"
 }
 
 variable "soft_delete_retention_days" {
@@ -75,6 +78,7 @@ variable "diagnostic_setting_enabled_log_categories" {
 variable "log_analytics_workspace_id" {
   description = "The ID of the Log Analytics workspace to send diagnostics to."
   type        = string
+  default     = "log-analytics"
 }
 
 variable "log_analytics_destination_type" {
@@ -91,45 +95,45 @@ variable "tags" {
 
 variable "nacl_default_action" {
   description = "The default action of the Network ACL (NACL) attached to the Azure Key Vault. Allowed values are 'Allow' or 'Deny'."
-  type = string
-  default = "Deny"
+  type        = string
+  default     = "Deny"
 }
 
 variable "sku_name" {
   description = "The SKU (pricing tier) name for the Azure Key Vault. Valid values include 'standard' and 'premium'."
-  type = string
-  default = "standard"
+  type        = string
+  default     = "standard"
 }
 
 variable "enabled_for_deployment" {
   description = "Specifies whether the Azure Key Vault is enabled for deployment. Set to 'true' to enable or 'false' to disable."
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "enabled_for_disk_encryption" {
   description = "Specifies whether the Azure Key Vault is enabled for disk encryption. Set to 'true' to enable or 'false' to disable."
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "enabled_for_template_deployment" {
   description = "Specifies whether the Azure Key Vault is enabled for template deployment. Set to 'true' to enable or 'false' to disable."
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "diagnostic_setting_enabled_metrics" {
   description = "A map of metrics categories and their settings to be enabled for this diagnostic setting."
-  type        = map(object({
-    enabled         = bool
-    retention_days  = number
+  type = map(object({
+    enabled           = bool
+    retention_days    = number
     retention_enabled = bool
   }))
   default = {
     "AllMetrics" = {
-      enabled = true
-      retention_days = 0
+      enabled           = true
+      retention_days    = 0
       retention_enabled = false
     }
   }

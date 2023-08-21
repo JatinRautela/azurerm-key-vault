@@ -102,3 +102,52 @@ module "key_vault" {
   soft_delete_retention_days = 60
   ... (other input variables)
 }
+```
+
+## List of variables
+
+| Variable Name                             | Description                                                      | Type            | Required | Default Value       |
+|-------------------------------------------|------------------------------------------------------------------|-----------------|----------|---------------------|
+| `vault_name`                              | Name of this Key vault.                                         | `string`        | Yes      |                     |
+| `resource_group_name`                     | Name of the resource group to create the resources in.          | `string`        | Yes      |                     |
+| `location`                                | Location to create the resources in.                            | `string`        | Yes      |                     |
+| `soft_delete_retention_days`              | Number of days to retain items once soft-deleted.              | `number`        | Yes      |                     |
+| `purge_protection_enabled`                | Enable purge protection for this Key vault?                    | `bool`          | No       | `false`             |
+| `access_policies`                         | Access policies for this Key vault.                            | `list(object)`  | No       | `[]`                |
+| `enable_rbac_authorization`               | Enable RBAC authorization for this Key vault?                  | `bool`          | No       | `false`             |
+| `network_acls_bypass`                     | Traffic that can bypass network rules for this Key vault.      | `string`        | No       | `"AzureServices"`  |
+| `network_acls_ip_rules`                   | List of IP addresses or CIDR blocks with access to Key vault. | `list(string)`  | No       | `[]`                |
+| `network_acls_virtual_network_subnet_ids` | List of subnet IDs with access to Key vault.                   | `list(string)`  | No       | `[]`                |
+| `enabled_for_deployment`                  | Is Key vault enabled for deployment?                           | `bool`          | No       | `false`             |
+| `enabled_for_disk_encryption`             | Is Key vault enabled for disk encryption?                      | `bool`          | No       | `false`             |
+| `enabled_for_template_deployment`         | Is Key vault enabled for template deployment?                  | `bool`          | No       | `false`             |
+| `diagnostic_setting_name`                 | Name of this diagnostic setting.                               | `string`        | No       | `"audit-logs"`      |
+| `diagnostic_setting_enabled_log_categories` | Enabled log categories for diagnostic setting.              | `list(string)`  | No       | See below           |
+| `log_analytics_workspace_id`              | ID of the Log Analytics workspace for diagnostics.            | `string`        | No       | `"log-analytics"`   |
+| `log_analytics_destination_type`          | Type of log analytics destination for this workspace.         | `string`        | No       | `null`              |
+| `tags`                                    | Tags to assign to the resources.                               | `map(string)`   | No       |                     |
+| `name`                                    | Prefix for all resource names.                                 | `string`        | No       | `""`                |
+| `default_tags`                            | Common tags for all resources.                                 | `map(string)`   | No       | See below           |
+| `common_tags`                             | Additional common tags for resources.                          | `map(string)`   | No       | `{}`                |
+| `nacl_default_action`                     | Default action of Network ACL attached to Key vault.           | `string`        | No       | `"Deny"`            |
+| `sku_name`                                | SKU name for the Key vault.                                    | `string`        | No       | `"standard"`        |
+| `diagnostic_setting_enabled_metrics`       | Enabled metric categories for diagnostic setting.              | `map(object)`   | No       | See below           |
+| `default_tags`                            | Common tags for all resources.                                 | `map(string)`   | No       | See below           |
+| `common_tags`                             | Additional common tags for resources.                          | `map(string)`   | No       | `{}`                |
+
+Default value for `diagnostic_setting_enabled_log_categories`:
+```hcl
+[
+  "AuditEvent"
+]
+```
+
+Default value for `default_tags`:
+```hcl
+{
+  "Scope": "ACR",
+  "CreatedBy": "Terraform"
+}
+```
+
+Please note that the variables in the "Required" column that are marked "No" can be left empty if you don't want to provide a value for them.

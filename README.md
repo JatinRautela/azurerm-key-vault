@@ -1,13 +1,33 @@
-# azurerm-key-vault
-
 # Azure Key Vault Terraform Module
+
+[![Lint Status](https://github.com/tothenew/terraform-aws-template/workflows/Lint/badge.svg)](https://github.com/tothenew/terraform-aws-template/actions)
+[![LICENSE](https://img.shields.io/github/license/tothenew/terraform-aws-template)](https://github.com/tothenew/terraform-aws-template/blob/master/LICENSE)
 
 This Terraform module deploys an Azure Key Vault with customizable access policies, network settings, and diagnostic settings.
 
-## Resources Created
+## Requirements
 
-- Azure Key Vault
-- Monitor Diagnostic Setting for Key Vault
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [azurerm](#requirement\_terraform) | >= 3.39.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [azurerm_key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_key) | resource |
+| [azurerm_monitor_diagnostic_setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data |
 
 ## Prerequisites
 
@@ -18,7 +38,7 @@ Before using this Terraform module, ensure that you have the following prerequis
 3. **Azure CLI**: Install the Azure CLI on your local machine. You can download it from the [Azure CLI website](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 
 - Terraform version >= 1.3.0 is required.
-- Azure provider version >= 3.16.0 is required.
+- Azure provider version >= 3.39.0 is required.
 
 ## Configure Azure Provider
 
@@ -151,3 +171,11 @@ Default value for `default_tags`:
 ```
 
 Please note that the variables in the "Required" column that are marked "No" can be left empty if you don't want to provide a value for them.
+
+## Authors
+
+Module managed by [TO THE NEW Pvt. Ltd.](https://github.com/tothenew)
+
+## License
+
+Apache 2 Licensed. See [LICENSE](https://github.com/tothenew/terraform-aws-template/blob/main/LICENSE) for full details.

@@ -12,8 +12,6 @@ locals {
   ]
 }
 
-data "azurerm_client_config" "current" {}
-
 resource "azurerm_key_vault" "key_vault" {
   name                = var.vault_name
   location            = var.location
